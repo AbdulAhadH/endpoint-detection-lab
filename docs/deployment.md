@@ -33,13 +33,12 @@ Sysmon → agent → manager → rule engine → indexer → dashboard — was c
 end-to-end, including a real alert automatically generated and mapped to a MITRE ATT&CK
 technique from ordinary command activity.
 
-
-4. Checking agent health going forward
+## 4. Checking agent health going forward
 
 Between the two incidents above, a few checks turned out to be the ones that actually matter day-to-day: on the manager, agent_control -i <id> shows the true live status and last keep-alive time, which is more reliable than the dashboard alone. On the Windows side, confirming the WazuhSvc service is actually running (not just installed) catches the most common failure mode, and the agent's own ossec.log almost always explains why a service that starts immediately stops again. When something looks disconnected but the manager disagrees, checking the manager's own indexer-sync status is worth doing before assuming the agent itself is the problem.
 
-Key takeaways
-Reinstalling an agent over an existing install can silently preserve a broken config file — worth checking the config directly rather than assuming a reinstall fixed everything.
+## Key takeaways
+Reinstalling an agent over an existing install can silently preserve a broken config file. Worth checking the config directly rather than assuming a reinstall fixed everything.
 A service's internal name and its display name in Windows aren't always the same thing, which can make a service look unavailable when it's really just being called by the wrong name.
-The dashboard's agent status and the manager's own live state can disagree temporarily. Best to check both rather than trusting one source alone.
+The dashboard's agent status and the manager's own live state can disagree temporarily. It's best to check both rather than trusting one source alone.
 When expected data doesn't show up in a search, it's worth confirming the exact field name being used rather than assuming the obvious one is correct.
