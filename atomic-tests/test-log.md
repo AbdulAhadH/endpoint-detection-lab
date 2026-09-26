@@ -54,7 +54,7 @@ Every technique tested, the exact command run, and what Wazuh actually did with 
   actual file-deletion behavior. Confirmed consistent across 5 related events in the
   same test run, not a one-off fluke.
 
-![Command run in PowerShell](../screenshots/00-test4-deletefile-powershell.png)
+![Command run in PowerShell](../screenshots/09-test4-deletefile-powershell.png)
 ![Wazuh showing all 5 related events consistently mismapped to T1059.003](../screenshots/09-test4-deletefile-before-table.png)
 
 - **Outcome:** This gap became the basis for a custom rule — see
