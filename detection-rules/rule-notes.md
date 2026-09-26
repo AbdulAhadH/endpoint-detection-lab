@@ -39,8 +39,10 @@ To check the rule wasn't broad, I ran two tests:
 2. A `del /f` on a test file — this **should** have triggered rule
    100010 but it didn't.
 
-![No-flag delete correctly did not trigger the rule](../screenshots/11-falsepositive-test1-no-flag.png)
+![No-flag delete correctly did not trigger the rule](../screenshots/11-falsepositive-test1-no-flag_1.png)
+![No-flag delete correctly did not trigger the rule](../screenshots/11-falsepositive-test1-no-flag_2.png)
 ![Flagged delete on a file, unexpectedly not caught by the original rule](../screenshots/12-falsepositive-test2-flag.png)
+
 
 **Root cause:** The rule's first version used `<if_sid>92052</if_sid>`, meaning it only
 evaluated after Wazuh's generic rule `92052` fired first. On the test, a
