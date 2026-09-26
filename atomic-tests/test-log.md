@@ -57,7 +57,6 @@ Every technique tested, the exact command run, and what Wazuh actually did with 
 ![Command run in PowerShell](../screenshots/09-test4-deletefile-powershell.png)
 ![Wazuh showing all 5 related events consistently mismapped to T1059.003](../screenshots/09-test4-deletefile-before-table.png)
 
-- **Outcome:** This gap became the basis for a custom rule — see
-  `detection-rules/rule-notes.md`.
+- **Outcome:** This gap became the basis for a custom rule — see detection-rules/rule-notes.md.
 
 
