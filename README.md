@@ -25,6 +25,8 @@ real attack simulations, finding gaps, and writing a custom detection rule to cl
     └─────────────────────┘                  └─────────────────────┘
 ```
 
+![Both Wazuh agents shown active on the dashboard](screenshots/01-agents-active.png)
+
 ## What this lab covers
 
 - [x] Deploy Wazuh manager, indexer, and dashboard
@@ -56,8 +58,7 @@ real attack simulations, finding gaps, and writing a custom detection rule to cl
 endpoint-detection-lab/
 ├── README.md                    # You are here
 ├── docs/
-│   ├── deployment.md            # Full deployment log
-│   └── agent-health-checks.md   # How to verify agent health day-to-day
+│   └── deployment.md            # Full deployment log
 ├── detection-rules/
 │   ├── local_rules.xml          # Custom Wazuh detection rule
 │   └── rule-notes.md            # What the rule does, why it was needed, and its limits
@@ -73,12 +74,28 @@ Testing MITRE ATT&CK techniques against Wazuh's default ruleset showed a mix of
 outcomes: one clean detection, one technique detected but mapped to the wrong
 technique ID, one clean detection, and one real gap (a file-deletion command that
 went completely unlabeled as such). That gap became the basis for this lab's one
-custom rule — see `detection-rules/rule-notes.md`
+custom rule — see [detection-rules/rule-notes.md](detection-rules/rule-notes.md)
+
+**Before** — the file-deletion command mismapped to T1059.003 instead of T1070.004:
+
+![Wazuh showing the del command mismapped to T1059.003](screenshots/09-test4-deletefile-before-table.png)
+
+**After** — the custom rule correctly tagging the same behavior as T1070.004:
+
+![Wazuh showing the custom rule correctly tagging T1070.004](screenshots/10-test4-deletefile-after-fixed.png)
+
+## Velociraptor demo
+
+Used Velociraptor's standalone collector mode (no server setup required) to run a real
+forensic artifact collection — capturing a detailed process snapshot with file hashes
+and Authenticode signature data, well beyond what Task Manager or `systeminfo` expose.
+
+![Velociraptor collection running successfully](screenshots/13-velociraptor-collection-run.png)
+![Sample of the collected process data, showing hashes and signature verification](screenshots/15-velociraptor-sample-data.png)
 
 ## Environment
 
 - **Wazuh server:** Ubuntu VM — Wazuh 4.14.x (manager + indexer + dashboard, single-node)
 - **Endpoints:** 2 Windows VMs running the Wazuh agent + Sysmon
 - All agent↔manager traffic is TLS-encrypted; certs generated via the Wazuh certificate
-  generation tool (see `docs/deployment.md`
-
+  generation tool (see [docs/deployment.md](docs/deployment.md)).
