@@ -71,10 +71,9 @@ endpoint-detection-lab/
 ## Key finding
 
 Testing MITRE ATT&CK techniques against Wazuh's default ruleset showed a mix of
-outcomes: one clean detection, one technique detected but mapped to the wrong
-technique ID, one clean detection, and one real gap (a file-deletion command that
-went completely unlabeled as such). That gap became the basis for this lab's one
-custom rule — see [detection-rules/rule-notes.md](detection-rules/rule-notes.md)
+outcomes: one detection, one technique detected but mapped to the wrong
+technique ID, and one gap (a file-deletion command thatwent unlabelled). That gap became the basis for
+custom rules — see [detection-rules/rule-notes.md](detection-rules/rule-notes.md)
 
 **Before** — the file-deletion command mismapped to T1059.003 instead of T1070.004:
 
